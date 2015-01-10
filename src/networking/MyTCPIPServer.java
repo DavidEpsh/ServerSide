@@ -49,11 +49,9 @@ public class MyTCPIPServer {
 							ClientHandler handler = new ClientHandler(socket);
 							executor.submit(new TaskRunnable(handler));
 						}
-						
 					} catch (IOException e) {
 						e.printStackTrace();
-					}	catch (Exception e) {
-						
+					}catch (Exception e) {
 					}
 				}				
 			}			
@@ -62,14 +60,18 @@ public class MyTCPIPServer {
 			
 		} catch (IOException e1) {
 			e1.printStackTrace();
-		}		
+		}
+
 	}
 	
 	public void stopServer() {		
 		try {
-			thread.interrupt();
+			if (thread.isAlive())
+				thread.interrupt();
+			
 			executor.shutdownNow();
 			server.close();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -45,6 +45,7 @@ public class SolutionManager {
 						e.printStackTrace();
 					}
 				}
+			
 		}
 		else {
 			solutionMap = new ConcurrentHashMap<String,Solution>();

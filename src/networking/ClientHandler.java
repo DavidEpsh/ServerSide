@@ -51,7 +51,6 @@ public class ClientHandler implements Task {
 				in.close();
 				socket.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}			
 		}	
