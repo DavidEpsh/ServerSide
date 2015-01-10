@@ -38,6 +38,7 @@ public class ClientHandler implements Task {
 			Solution solution = model.getSolution();
 			
 			//System.out.println("Found solution: " + solution.getProblemDescription());
+			
 			out.writeObject(solution);			
 			
 		} catch (IOException e) {			
