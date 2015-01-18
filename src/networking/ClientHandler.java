@@ -30,9 +30,14 @@ public class ClientHandler implements Task {
 			
 			Problem problem = (Problem)in.readObject();
 			//System.out.println("Got new problem: " + problem.getDomainName());
-			
+						
 			Model model = new MyModel();
 			model.selectDomain(problem.getDomainName(), problem.getDomainArgs());
+			
+			if (problem.getAlgorithmName()==null){
+				out.writeObject(model.getDescription());
+			}
+			
 			model.selectAlgorithm(problem.getAlgorithmName());
 			model.solveDomain();
 			Solution solution = model.getSolution();

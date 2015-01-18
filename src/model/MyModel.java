@@ -89,4 +89,9 @@ public class MyModel extends Observable implements Model {
 	public void doTask() {
 		solveDomain();
 	}
+	
+	@Override
+	public String getDescription(){
+		return domain.getProblemDescription();
+	}
 }

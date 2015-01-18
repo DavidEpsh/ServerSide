@@ -53,7 +53,9 @@ public class MyTCPIPServer {
 						e.printStackTrace();
 					}catch (Exception e) {
 					}
-				}				
+				}		
+				
+				//
 			}			
 		});
 		thread.start();
