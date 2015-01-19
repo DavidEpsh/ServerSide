@@ -99,5 +99,10 @@ public class EightPuzzleDomain implements SearchDomain {
 		
 		return this.start.toString();
 	}
+	
+	@Override
+	public String getGameDescription(){
+		return this.start.toString();
+	}
 
 }

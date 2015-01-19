@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 
 
+
 import model.algorithm.Action;
 import model.algorithm.SearchDomain;
 import model.algorithm.State;
@@ -14,7 +15,7 @@ public class MazeGameDomain implements SearchDomain{
 	MazeGameState start,goal;
 	
 	protected int length, width,blocks;
-	String[] mazeGameDescription;
+	String mazeGameDescription;
 	
 	int[][] maze;
 
@@ -53,6 +54,8 @@ public class MazeGameDomain implements SearchDomain{
 			else 
 				x--;
 		}
+		
+		setMazeGameDescription();
 		
 	}
 	
@@ -109,13 +112,33 @@ public class MazeGameDomain implements SearchDomain{
 	
 	public void setMazeGameDescription(){
 		
-		this.mazeGameDescription = new String[width*length];
+		mazeGameDescription = "";
+		mazeGameDescription += Integer.toString(length)+",";
+		mazeGameDescription += Integer.toString(width)+",";
+		
+		
+		for (int i =0 ; i<length ; i++){
+			for(int j=0 ; j<width ; j++){
+				
+				if(i==length-1 && j== width-1){
+					mazeGameDescription += Integer.toString(maze[i][j]);
+					}
+				
+				mazeGameDescription += Integer.toString(maze[i][j]) + ","; 	
+				}
+			}
+
 	}
 
+	
 	@Override
 	public String getProblemDescription() {
 		
 		return ""+"0,0" + "-->" + (this.length-1) + "," + (this.width-1);
 	}
-
+	
+	@Override
+	public String getGameDescription(){
+		return this.mazeGameDescription;
+	}
 }

@@ -12,4 +12,5 @@ public interface SearchDomain {
 	void init(String args);
 	void init();	
 	String getProblemDescription();
+	String getGameDescription();
 }

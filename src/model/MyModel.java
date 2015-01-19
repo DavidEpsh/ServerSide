@@ -94,4 +94,9 @@ public class MyModel extends Observable implements Model {
 	public String getDescription(){
 		return domain.getProblemDescription();
 	}
+	
+	@Override
+	public String getGameDescription(){
+		return domain.getGameDescription();
+	}
 }
