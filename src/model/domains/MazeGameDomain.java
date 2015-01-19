@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 
 
+
 import model.algorithm.Action;
 import model.algorithm.SearchDomain;
 import model.algorithm.State;
@@ -13,6 +14,7 @@ public class MazeGameDomain implements SearchDomain{
 	MazeGameState start,goal;
 	
 	protected int length, width,blocks;
+	String[] mazeGameDescription;
 	
 	int[][] maze;
 
@@ -103,6 +105,11 @@ public class MazeGameDomain implements SearchDomain{
 	public void init() {
 		init("4,4,5");
 		
+	}
+	
+	public void setMazeGameDescription(){
+		
+		this.mazeGameDescription = new String[width*length];
 	}
 
 	@Override
