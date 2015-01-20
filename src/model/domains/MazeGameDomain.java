@@ -14,7 +14,7 @@ public class MazeGameDomain implements SearchDomain{
 	
 	MazeGameState start,goal;
 	
-	protected int length, width, blocks;
+	protected int width, length, blocks;
 	String mazeGameDescription;
 	
 	int[][] maze;
@@ -29,26 +29,26 @@ public class MazeGameDomain implements SearchDomain{
 			initGivenGame(mazeProperties);
 		}
 		else{
-		this.length = Integer.parseInt( mazeProperties[0] );
-		this.width = Integer.parseInt( mazeProperties[1] );
+		this.width = Integer.parseInt( mazeProperties[0] );
+		this.length = Integer.parseInt( mazeProperties[1] );
 		this.blocks = Integer.parseInt( mazeProperties[2] );
 		
 		this.start = new MazeGameState(0, 0);
-		this.goal = new MazeGameState(length-1,width-1);
+		this.goal = new MazeGameState(width-1,length-1);
 			
-		this.maze= new int[length][width];
+		this.maze= new int[width][length];
 		
-		for(int i=0 ; i<length ; i++) {
-			for (int j=0; j<width ; j++ ){
+		for(int i=0 ; i<width ; i++) {
+			for (int j=0; j<length ; j++ ){
 				this.maze[i][j]=1;
 			}
 		}
 		
 		for (int x=0 ; x < this.blocks ; x++){
-			int rX = (int) (Math.random()*length);
-			int rY = (int) (Math.random()*width);
+			int rX = (int) (Math.random()*width);
+			int rY = (int) (Math.random()*length);
 			
-			if ((rX==0 && rY==0) || (rX == length-1 && rY == width -1 ) ){
+			if ((rX==0 && rY==0) || (rX == width-1 && rY == length -1 ) ){
 				x--;
 			}
 			
@@ -90,8 +90,8 @@ public class MazeGameDomain implements SearchDomain{
 
 		MazeGameState currMazeState = (MazeGameState)current;
 		
-		for (int x = Math.max(0, currMazeState.getX()-1) ; x <= Math.min(this.length - 1, currMazeState.getX()+1) ; x++ ){
-			for (int y = Math.max(0, currMazeState.getY()-1) ; y <= Math.min(this.width - 1, currMazeState.getY()+1) ; y++){
+		for (int x = Math.max(0, currMazeState.getX()-1) ; x <= Math.min(this.width - 1, currMazeState.getX()+1) ; x++ ){
+			for (int y = Math.max(0, currMazeState.getY()-1) ; y <= Math.min(this.length - 1, currMazeState.getY()+1) ; y++){
 				if(x == currMazeState.getX() && y == currMazeState.getY() )
 					continue;
 			
@@ -121,10 +121,10 @@ public class MazeGameDomain implements SearchDomain{
 //		mazeGameDescription += Integer.toString(width)+",";
 		
 		
-		for (int i =0 ; i<length ; i++){
-			for(int j=0 ; j<width ; j++){
+		for (int i =0 ; i<width ; i++){
+			for(int j=0 ; j<length ; j++){
 				
-				if(i==length-1 && j== width-1){
+				if(i==width-1 && j== length-1){
 					temp += Integer.toString(maze[i][j]);
 					}
 				
@@ -138,20 +138,20 @@ public class MazeGameDomain implements SearchDomain{
 
 	public void initGivenGame(String[] args){
 		
-		length = Integer.parseInt(args[2]);
-		width = Integer.parseInt(args[3]);
+		width = Integer.parseInt(args[2]);
+		length = Integer.parseInt(args[3]);
 		
-		int[][] intArray = new int[length][width];
+		int[][] intArray = new int[width][length];
 		int k =4;
-		for (int i=0 ; i<width ; i++){
-			for (int j=0 ; j<length ; j++){
+		for (int i=0 ; i<length ; i++){
+			for (int j=0 ; j<width ; j++){
 			intArray[i][j] = Integer.parseInt(args[k]);
 			k++;
 			}
 		}
 		
-		start = new MazeGameState(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
-		goal = new MazeGameState(Integer.parseInt(args[2])-1, Integer.parseInt(args[3])-1);
+		start = new MazeGameState(Integer.parseInt(args[1]), Integer.parseInt(args[0]));
+		goal = new MazeGameState(Integer.parseInt(args[3])-1, Integer.parseInt(args[2])-1);
 		
 		maze = intArray;
 		setMazeGameDescription();
@@ -160,7 +160,7 @@ public class MazeGameDomain implements SearchDomain{
 	@Override
 	public String getProblemDescription() {
 		
-		return ""+ Integer.toString(start.getX())+ "," + Integer.toString(start.getY()) + "-->" + (this.length-1) + "," + (this.width-1);
+		return ""+ Integer.toString(start.getX())+ "," + Integer.toString(start.getY()) + "-->" + (this.width-1) + "," + (this.length-1);
 	}
 	
 	@Override
