@@ -14,7 +14,7 @@ public class MazeGameDomain implements SearchDomain{
 	
 	MazeGameState start,goal;
 	
-	protected int length, width,blocks;
+	protected int length, width, blocks;
 	String mazeGameDescription;
 	
 	int[][] maze;
@@ -25,9 +25,10 @@ public class MazeGameDomain implements SearchDomain{
 	public void init(String args){
 		
 		String[] mazeProperties = args.split(",");
-		if (mazeProperties.length > 4){
+		if (mazeProperties.length > 6){
 			initGivenGame(mazeProperties);
 		}
+		else{
 		this.length = Integer.parseInt( mazeProperties[0] );
 		this.width = Integer.parseInt( mazeProperties[1] );
 		this.blocks = Integer.parseInt( mazeProperties[2] );
@@ -57,7 +58,7 @@ public class MazeGameDomain implements SearchDomain{
 			else 
 				x--;
 		}
-		
+		}
 		setMazeGameDescription();
 		
 	}
@@ -67,7 +68,7 @@ public class MazeGameDomain implements SearchDomain{
 	}
 	
 	public boolean isPossible(int x, int y) {
-		if (maze[x][y]==0)
+		if (maze[y][x]==0)
 			return false;
 		else 
 			return true;
@@ -109,41 +110,51 @@ public class MazeGameDomain implements SearchDomain{
 
 	@Override
 	public void init() {
-		init("4,4,5");
+		init("8,8,20");
 		
 	}
 	
 	public void setMazeGameDescription(){
 		
-		mazeGameDescription = "";
-		mazeGameDescription += Integer.toString(length)+",";
-		mazeGameDescription += Integer.toString(width)+",";
+		String temp = "";
+//		mazeGameDescription += Integer.toString(length)+",";
+//		mazeGameDescription += Integer.toString(width)+",";
 		
 		
 		for (int i =0 ; i<length ; i++){
 			for(int j=0 ; j<width ; j++){
 				
 				if(i==length-1 && j== width-1){
-					mazeGameDescription += Integer.toString(maze[i][j]);
+					temp += Integer.toString(maze[i][j]);
 					}
 				
 				else{
-					mazeGameDescription += Integer.toString(maze[i][j]) + ",";
+					temp += Integer.toString(maze[i][j]) + ",";
 				}
 				}
 			}
+		mazeGameDescription = temp;
 	}
 
 	public void initGivenGame(String[] args){
 		
-		int[] intArray = new int[args.length];
+		length = Integer.parseInt(args[2]);
+		width = Integer.parseInt(args[3]);
 		
-		for (int i=0 ; i<args.length ; i++){
-			intArray[i] = Integer.parseInt(args[i]);
+		int[][] intArray = new int[length][width];
+		int k =4;
+		for (int i=0 ; i<width ; i++){
+			for (int j=0 ; j<length ; j++){
+			intArray[i][j] = Integer.parseInt(args[k]);
+			k++;
+			}
 		}
 		
-		start = new MazeGameState(intArray[0], intArray[1]);
+		start = new MazeGameState(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+		goal = new MazeGameState(Integer.parseInt(args[2])-1, Integer.parseInt(args[3])-1);
 		
+		maze = intArray;
+		setMazeGameDescription();
 	}
 	
 	@Override
