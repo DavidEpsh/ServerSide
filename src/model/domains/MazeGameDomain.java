@@ -147,7 +147,7 @@ public class MazeGameDomain implements SearchDomain{
 	@Override
 	public String getProblemDescription() {
 		
-		return ""+ Integer.toString(start.getX()) + Integer.toString(start.getY()) + "-->" + (this.length-1) + "," + (this.width-1);
+		return ""+ Integer.toString(start.getX())+ "," + Integer.toString(start.getY()) + "-->" + (this.length-1) + "," + (this.width-1);
 	}
 	
 	@Override
