@@ -25,6 +25,9 @@ public class MazeGameDomain implements SearchDomain{
 	public void init(String args){
 		
 		String[] mazeProperties = args.split(",");
+		if (mazeProperties.length > 4){
+			initGivenGame(mazeProperties);
+		}
 		this.length = Integer.parseInt( mazeProperties[0] );
 		this.width = Integer.parseInt( mazeProperties[1] );
 		this.blocks = Integer.parseInt( mazeProperties[2] );
@@ -95,7 +98,7 @@ public class MazeGameDomain implements SearchDomain{
 					
 					State next = new MazeGameState(x,y);
 
-					Action a = new Action(current.toString() + " --> " + next.toString());
+					Action a = new Action(current.toString() + "-->" + next.toString());
 					moves.put(a, next);	
 				}
 				
@@ -127,14 +130,24 @@ public class MazeGameDomain implements SearchDomain{
 				mazeGameDescription += Integer.toString(maze[i][j]) + ","; 	
 				}
 			}
-
 	}
 
+	public void initGivenGame(String[] args){
+		
+		int[] intArray = new int[args.length];
+		
+		for (int i=0 ; i<args.length ; i++){
+			intArray[i] = Integer.parseInt(args[i]);
+		}
+		
+		start = new MazeGameState(intArray[0], intArray[1]);
+		
+	}
 	
 	@Override
 	public String getProblemDescription() {
 		
-		return ""+"0,0" + "-->" + (this.length-1) + "," + (this.width-1);
+		return ""+ Integer.toString(start.getX()) + Integer.toString(start.getY()) + "-->" + (this.length-1) + "," + (this.width-1);
 	}
 	
 	@Override
