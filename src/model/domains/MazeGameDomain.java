@@ -127,7 +127,9 @@ public class MazeGameDomain implements SearchDomain{
 					mazeGameDescription += Integer.toString(maze[i][j]);
 					}
 				
-				mazeGameDescription += Integer.toString(maze[i][j]) + ","; 	
+				else{
+					mazeGameDescription += Integer.toString(maze[i][j]) + ",";
+				}
 				}
 			}
 	}
