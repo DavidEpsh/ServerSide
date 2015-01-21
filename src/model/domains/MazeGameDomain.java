@@ -28,7 +28,7 @@ public class MazeGameDomain implements SearchDomain{
 		if (mazeProperties.length > 4){
 			initGivenGame(mazeProperties);
 		}
-		
+		else{
 		this.length = Integer.parseInt( mazeProperties[0] );
 		this.heigth = Integer.parseInt( mazeProperties[1] );
 		this.blocks = Integer.parseInt( mazeProperties[2] );
@@ -60,6 +60,7 @@ public class MazeGameDomain implements SearchDomain{
 		}
 		
 		setMazeGameDescription();
+		}
 		
 	}
 	
@@ -140,9 +141,20 @@ public class MazeGameDomain implements SearchDomain{
 		for (int i=0 ; i<args.length ; i++){
 			intArray[i] = Integer.parseInt(args[i]);
 		}
+		length = intArray[2];
+		heigth = intArray[3];
+		maze = new int[heigth][length];
 		
 		start = new MazeGameState(intArray[0], intArray[1]);
+		goal = new MazeGameState(length-1,heigth-1);
 		
+		int k=4;
+		for(int y=0 ; y<heigth; y++){
+			for(int x=0; x<length; x++){
+				maze[y][x] = intArray[k++];
+			}
+		}
+		setMazeGameDescription();
 	}
 	
 	@Override
