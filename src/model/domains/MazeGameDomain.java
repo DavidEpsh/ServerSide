@@ -14,7 +14,7 @@ public class MazeGameDomain implements SearchDomain{
 	
 	MazeGameState start,goal;
 	
-	protected int length, width,blocks;
+	protected int length, heigth ,blocks;
 	String mazeGameDescription;
 	
 	int[][] maze;
@@ -28,31 +28,32 @@ public class MazeGameDomain implements SearchDomain{
 		if (mazeProperties.length > 4){
 			initGivenGame(mazeProperties);
 		}
+		
 		this.length = Integer.parseInt( mazeProperties[0] );
-		this.width = Integer.parseInt( mazeProperties[1] );
+		this.heigth = Integer.parseInt( mazeProperties[1] );
 		this.blocks = Integer.parseInt( mazeProperties[2] );
 		
 		this.start = new MazeGameState(0, 0);
-		this.goal = new MazeGameState(length-1,width-1);
+		this.goal = new MazeGameState(length-1,heigth-1);
 			
-		this.maze= new int[length][width];
+		this.maze= new int[heigth][length];
 		
 		for(int i=0 ; i<length ; i++) {
-			for (int j=0; j<width ; j++ ){
+			for (int j=0; j<heigth ; j++ ){
 				this.maze[i][j]=1;
 			}
 		}
 		
 		for (int x=0 ; x < this.blocks ; x++){
 			int rX = (int) (Math.random()*length);
-			int rY = (int) (Math.random()*width);
+			int rY = (int) (Math.random()*heigth);
 			
-			if ((rX==0 && rY==0) || (rX == length-1 && rY == width -1 ) ){
+			if ((rX==0 && rY==0) || (rX == length-1 && rY == heigth -1 ) ){
 				x--;
 			}
 			
-			else if (this.maze[rX][rY]==1)
-						this.maze[rX][rY]=0;
+			else if (this.maze[rY][rX]==1)
+						this.maze[rY][rX]=0;
 			
 			else 
 				x--;
@@ -67,7 +68,7 @@ public class MazeGameDomain implements SearchDomain{
 	}
 	
 	public boolean isPossible(int x, int y) {
-		if (maze[x][y]==0)
+		if (maze[y][x]==0)
 			return false;
 		else 
 			return true;
@@ -89,9 +90,9 @@ public class MazeGameDomain implements SearchDomain{
 
 		MazeGameState currMazeState = (MazeGameState)current;
 		
-		for (int x = Math.max(0, currMazeState.getX()-1) ; x <= Math.min(this.length - 1, currMazeState.getX()+1) ; x++ ){
-			for (int y = Math.max(0, currMazeState.getY()-1) ; y <= Math.min(this.width - 1, currMazeState.getY()+1) ; y++){
-				if(x == currMazeState.getX() && y == currMazeState.getY() )
+		for (int y = Math.max(0, currMazeState.getY()-1) ; y <= Math.min(this.heigth - 1, currMazeState.getY()+1) ; y++){
+			for (int x = Math.max(0, currMazeState.getX()-1) ; x <= Math.min(this.length - 1, currMazeState.getX()+1) ; x++ ){
+				if( (x == currMazeState.getX() && y == currMazeState.getY()) ||  Math.abs(x-currMazeState.getX()) + Math.abs(y-currMazeState.getY()) >1)
 					continue;
 			
 				if (this.isPossible( x , y )) {
@@ -109,7 +110,7 @@ public class MazeGameDomain implements SearchDomain{
 
 	@Override
 	public void init() {
-		init("4,4,5");
+		init("8,8,20");
 		
 	}
 	
@@ -117,17 +118,17 @@ public class MazeGameDomain implements SearchDomain{
 		
 		mazeGameDescription = "";
 		mazeGameDescription += Integer.toString(length)+",";
-		mazeGameDescription += Integer.toString(width)+",";
+		mazeGameDescription += Integer.toString(heigth)+",";
 		
 		
-		for (int i =0 ; i<length ; i++){
-			for(int j=0 ; j<width ; j++){
+		for (int y=0 ; y<heigth ; y++){
+			for(int x=0 ; x<length ; x++){
 				
-				if(i==length-1 && j== width-1){
-					mazeGameDescription += Integer.toString(maze[i][j]);
+				if(y==heigth-1 && x== length-1){
+					mazeGameDescription += Integer.toString(maze[y][x]);
 					}
 				
-				mazeGameDescription += Integer.toString(maze[i][j]) + ","; 	
+				mazeGameDescription += Integer.toString(maze[y][x]) + ","; 	
 				}
 			}
 	}
@@ -147,7 +148,7 @@ public class MazeGameDomain implements SearchDomain{
 	@Override
 	public String getProblemDescription() {
 		
-		return ""+ Integer.toString(start.getX()) + Integer.toString(start.getY()) + "-->" + (this.length-1) + "," + (this.width-1);
+		return ""+ Integer.toString(start.getX()) + Integer.toString(start.getY()) + "-->" + (this.length-1) + "," + (this.heigth-1);
 	}
 	
 	@Override

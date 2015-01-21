@@ -43,8 +43,9 @@ public class EightPuzzleDomain implements SearchDomain {
 		EightPuzzleState currentPuzzleState = (EightPuzzleState)current;
 		currentPuzzleState.setCurrZeroLocation();
 			
-		for (int x = Math.max(0, currentPuzzleState.getCurrZeroX()-1) ; x <= Math.min(2, currentPuzzleState.getCurrZeroX()+1) ; x++ ){
-			for (int y = Math.max(0, currentPuzzleState.getCurrZeroY()-1) ; y <= Math.min(2, currentPuzzleState.getCurrZeroY()+1) ; y++){
+		for (int y = Math.max(0, currentPuzzleState.getCurrZeroY()-1) ; y <= Math.min(2, currentPuzzleState.getCurrZeroY()+1) ; y++){
+			for (int x = Math.max(0, currentPuzzleState.getCurrZeroX()-1) ; x <= Math.min(2, currentPuzzleState.getCurrZeroX()+1) ; x++ ){
+			
 				if(x == currentPuzzleState.getCurrZeroX() && y == currentPuzzleState.getCurrZeroY() )
 					continue;
 			
@@ -70,28 +71,9 @@ public class EightPuzzleDomain implements SearchDomain {
 
 	public boolean isSolvable(EightPuzzleState start){
 		
-		EightPuzzleState startState = (EightPuzzleState) start;
-		int distance=0,tempInt;
+		int distance = start.getEvaluation(goal);
 		
-		for(int x=0 ; x<3 ; x++){
-			for (int y=0 ; y<3 ; y++){
-				if(startState.getPoint(x, y)==0)
-					continue;
-				
-				tempInt = start.getPoint(x, y);
-				
-				for (int i=0 ; i<3 ; i++){
-					for (int j=0 ; j<3 ; j++){
-						if (tempInt == this.goal.getPoint(i, j))
-							distance += Math.abs(i-x)+Math.abs(y-j);
-					}
-				}
-			}
-		}
-		if (distance == 1)
-			return true;
-		
-			return distance%2==0; 
+		return (distance%2==0 || distance == 1) ; 
 		}
 
 	@Override

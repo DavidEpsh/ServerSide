@@ -32,7 +32,7 @@ public class MyTCPIPServer {
 	public void startServer() {
 		try {
 			server = new ServerSocket(port);			
-			server.setSoTimeout(1000000);
+			server.setSoTimeout(2000);
 			
 			executor = Executors.newFixedThreadPool(numOfClients);
 		
@@ -49,34 +49,32 @@ public class MyTCPIPServer {
 							ClientHandler handler = new ClientHandler(socket);
 							executor.submit(new TaskRunnable(handler));
 						}
+					} catch (SocketTimeoutException e){
+						
 					} catch (IOException e) {
 						e.printStackTrace();
 					}catch (Exception e) {
 					}
 				}		
 				
-				//
+				executor.shutdownNow();
+				
+				try {
+					server.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}			
 		});
-		thread.start();
+			thread.start();
 			
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-
 	}
 	
 	public void stopServer() {		
-		try {
-			if (thread.isAlive())
-				thread.interrupt();
-			
-			executor.shutdownNow();
-			server.close();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			thread.interrupt();
 	}
-	
 }
