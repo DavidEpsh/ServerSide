@@ -10,7 +10,11 @@ import model.MyModel;
 import model.Problem;
 import model.Solution;
 import tasks.Task;
-
+/**
+ * This class establishes the connection requests sent from clients
+ * after a connection to a client is established, we receive an object from the client
+ * new model is created and the solution to the problem is sent back to the client
+ */
 public class ClientHandler implements Task {
 	private Socket socket;
 	

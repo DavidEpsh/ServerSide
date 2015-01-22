@@ -9,7 +9,10 @@ import model.algorithm.H_functions;
 import model.algorithm.SearchDomain;
 import model.algorithm.Searcher;
 import model.domains.*;
-
+/**
+ * The Model class holds all our variables, Our search domain, the Algorithm, Heuristics and the functions that are common to all of the 
+ * Models that extends it
+ */
 public class MyModel extends Observable implements Model {
 	
 	private SearchDomain domain;

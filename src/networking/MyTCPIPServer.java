@@ -10,7 +10,12 @@ import java.util.concurrent.Executors;
 import config.HandleProperties;
 import config.ServerProperties;
 import tasks.TaskRunnable;
-
+/**
+ * This class is in charge of managing the servers properties, 
+ * a thread is assigned to each new client connection request
+ * @author David
+ *
+ */
 public class MyTCPIPServer {
 	private ServerSocket server;
 	private ExecutorService executor;

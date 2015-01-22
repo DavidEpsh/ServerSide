@@ -14,6 +14,11 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.concurrent.ConcurrentHashMap;
+/**
+ * This class holds a .dat file which contains HashMap of Games that we have previously solved.
+ * using this class we are able to to check if we already have a solution for the given problem and give it instead of calling our Solve functions.
+ * if we haven't solved the specific problem, on exit, our new problems will be saved to this HashMap and to the file.
+ */
 public class SolutionManager {
 
 	private static SolutionManager instance = null;

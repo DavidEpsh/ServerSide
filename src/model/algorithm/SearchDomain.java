@@ -2,7 +2,10 @@ package model.algorithm;
 
 import java.util.HashMap;
 
-// the expected functionality from a search problem 
+/**
+ * this interface holds the functionality expected from our domains
+ *
+ */
 public interface SearchDomain {
 
 	// this functoin ......

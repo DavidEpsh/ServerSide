@@ -1,3 +1,4 @@
+package main;
 import java.util.Scanner;
 
 import model.SolutionManager;
@@ -15,7 +16,7 @@ public class Run {
 		Scanner scanner = new Scanner(System.in);
 		do
 		{
-			System.out.print("Enter command: ");
+			System.out.print("\nEnter command: 'start' to initialize the server, 'exit' to close \n");
 			action = scanner.nextLine();		
 			
 			run.handleAction(action);

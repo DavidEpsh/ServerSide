@@ -1,7 +1,9 @@
 package model;
 
 import java.io.Serializable;
-
+/**
+ * Simplified class that holds all the variables that will later be implemented into our model
+ */
 public class Problem implements Serializable {
 	private String domainName;
 	private String domainArgs;

@@ -6,7 +6,9 @@ import java.util.HashMap;
 import model.algorithm.H_functions;
 
 import model.domains.*;
-
+/**
+ * This class is used to create new heuristic functions for our Model
+ */
 public class HeuristicFactory {
 	private HashMap<String , HeuristicCreator> heuristics;
 	

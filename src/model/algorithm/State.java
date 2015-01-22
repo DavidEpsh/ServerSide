@@ -1,5 +1,7 @@
 package model.algorithm;
-
+/**
+ * this class represents all common functionality in a game state in each domain. 
+ */
 public abstract class State implements Comparable<State>{
 	// the string representation of the state
 	
