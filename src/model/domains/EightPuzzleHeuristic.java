@@ -6,7 +6,7 @@ import model.algorithm.State;
 public class EightPuzzleHeuristic implements H_functions {
 
 	@Override
-	public double h_function(State current, State goal) {
+	public int h_function(State current, State goal) {
 
 				EightPuzzleState EightPuzzleCurrent = (EightPuzzleState)current;
 				EightPuzzleState EightPuzzleGoal = (EightPuzzleState)goal;

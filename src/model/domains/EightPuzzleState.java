@@ -1,8 +1,5 @@
 package model.domains;
 
-import java.util.ArrayList;
-
-import model.MyModel;
 import model.algorithm.*;
 
 public class EightPuzzleState extends State {

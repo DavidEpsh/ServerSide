@@ -53,7 +53,7 @@ public class MyModel extends Observable implements Model {
 				((Astar) algorithm).setHeuristic(heuristic);
 			}
 			else if (domain instanceof MazeGameDomain){
-				setHeuristicName("maze");
+				setHeuristicName("Maze");
 			((Astar) algorithm).setHeuristic(heuristic);
 		}
 		}
